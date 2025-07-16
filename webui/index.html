@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Lateral con Iframe</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: sans-serif;
+            height: 100vh; /* Make body take full viewport height */
+            overflow: hidden; /* Prevent body scrollbar */
+        }
+
+        #sidebar {
+            width: 15%; /* Small percentage for the sidebar */
+            background-color: #f0f0f0;
+            padding: 15px;
+            box-sizing: border-box; /* Include padding in the width */
+            overflow-y: auto; /* Enable scrolling for sidebar if content overflows */
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .menu-item img {
+            width: 80%; /* Adjust image size as needed within the sidebar */
+            max-width: 100px; /* Optional: set a max width for images */
+            height: auto;
+            border-radius: 8px; /* Slightly rounded corners for images */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        .menu-item p {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        #content-frame {
+            flex-grow: 1; /* Make iframe container take remaining space */
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex; /* Use flex to ensure iframe fills */
+            flex-direction: column;
+        }
+
+        #main-iframe {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <div class="menu-item" onclick="loadGuiV2()">
+            <img src="/images/venus-os-v2.jpg" alt="Venus OS V2">
+            <p>GUI v2</p>
+        </div>
+        <div class="menu-item" onclick="loadGuiV1()">
+            <img src="/images/venus-os-v1.jpg" alt="Venus OS V1">
+            <p>GUI v1</p>
+        </div>
+        </div>
+
+    <div id="content-frame">
+        <iframe id="main-iframe" src="about:blank" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // Definición de URLs en variables
+        const guiV2Url = 'http://192.168.2.10/gui-v2/';
+        const guiV1Url = 'http://192.168.2.10/gui-v1/';
+
+        function loadContent(url) {
+            document.getElementById('main-iframe').src = url;
+        }
+
+        // Funciones específicas para cada menú que llaman a loadContent
+        function loadGuiV2() {
+            loadContent(guiV2Url);
+        }
+
+        function loadGuiV1() {
+            loadContent(guiV1Url);
+        }
+
+        // Cargar una página por defecto al inicio
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGuiV2(); // Carga GUI v2 por defecto al cargar la página
+        });
+    </script>
+
+</body>
+</html>
