@@ -1,0 +1,3 @@
+[submodule "projects/van-webui"]
+	path = projects/van-webui
+	url = git@github.com:jordisf/van-webui.git
