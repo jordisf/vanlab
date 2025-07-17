@@ -1,7 +1,10 @@
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt install nodejs npm -y
+#!/bin/bash
 
-echo "#### Installed Node and Npm versions ######"
-node -v
-npm -v
+clone_projects() {
+    echo "Clonando proyectos desde GitHub (o submódulos)..."
+    # Ejemplo: git clone https://github.com/tu_usuario/tu_proyecto.git ~/projects/tu_proyecto
+    # O mejor aún, usa submódulos de Git si son proyectos que ya tienes en GitHub
+    git submodule update --init --recursive
+}
+
+clone_projects
