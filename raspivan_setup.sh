@@ -34,7 +34,7 @@ decrypt_secrets() {
     chmod 600 ~/.ssh/id_rsa
     openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret/id_rsa.pub.enc -out ~/.ssh/id_rsa.pub -k "$DECRYPT_PASS"
     chmod 644 ~/.ssh/id_rsa.pub
-    
+
 }
 
 # --- Funciones para cada fase de la configuración ---
@@ -100,7 +100,7 @@ decrypt_secrets
 install_system_dependencies
 
 # Paso 3: Configurar claves SSH
-configure_ssh_keys
+# configure_ssh_keys
 
 # Paso 4: Configurar Tailscale (usará $TAILSCALE_AUTH_KEY si se cargó desde los secretos)
 setup_tailscale
@@ -109,10 +109,10 @@ setup_tailscale
 clone_projects
 
 # Paso 6: Configurar el servidor web (ej. Nginx para el proyecto web)
-configure_web_server
+# configure_web_server
 
 # Paso 7: Copiar otras configuraciones personalizadas
-copy_custom_configs
+# copy_custom_configs
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
