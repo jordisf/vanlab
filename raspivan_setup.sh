@@ -83,6 +83,10 @@ setup_kiosk_mode() {
     echo "--> Ejecutando script de configuración del modo quiosco..."
     "$SCRIPTS_PATH/setup_kiosk_mode.sh"
 }
+disable_virtual_keyboard() {
+    echo "--> Deshabilitando el teclado virtual..."
+    "$SCRIPTS_PATH/disable_virtual_keyboard.sh"
+}
 
 # Función para configurar el servidor web y copiar configs
 configure_web_server() {
@@ -140,6 +144,9 @@ clone_projects
 
 # Paso 8: Inicializar y clonar los proyectos (submódulos)
 setup_kiosk_mode
+
+
+disable_virtual_keyboard
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
