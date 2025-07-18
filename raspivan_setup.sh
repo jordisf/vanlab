@@ -32,6 +32,15 @@ decrypt_secrets() {
 
         echo "--> Secretos descifrados temporalmente. Cargando variables de entorno..."
         source "$DECRYPTED_SECRETS_FILE" # ¡Esto carga las variables en el entorno del script!
+        while IFS='=' read -r key value; do
+            # Asegúrate de que la línea no esté vacía y no sea un comentario
+            if [[ ! -z "$key" && "$key" != \#* ]]; then
+                # Exporta la variable. Esto la hace disponible para subshells.
+                export "$key"
+                # Opcional: Puedes hacer echo de las variables exportadas (sin sus valores sensibles)
+                # echo "  Exportada variable: $key"
+            fi
+        done < "$DECRYPTED_SECRETS_FILE"
         rm "$DECRYPTED_SECRETS_FILE"     # ¡Eliminar el archivo temporal inmediatamente después de cargarlo!
         echo "--> Archivo de secretos temporal eliminado del disco."
     else
@@ -68,6 +77,11 @@ setup_tailscale() {
     # Pasamos el auth key como una variable de entorno al script de tailscale si lo deseas
     # export TAILSCALE_AUTH_KEY="$TAILSCALE_AUTH_KEY" # Esto ya está cargado por 'source'
     "$SCRIPTS_PATH/setup_tailscale.sh"
+}
+
+setup_kiosk_mode() {
+    echo "--> Ejecutando script de configuración del modo quiosco..."
+    "$SCRIPTS_PATH/setup_kiosk_mode.sh"
 }
 
 # Función para configurar el servidor web y copiar configs
@@ -123,6 +137,9 @@ clone_projects
 
 # Paso 7: Copiar otras configuraciones personalizadas
 # copy_custom_configs
+
+# Paso 8: Inicializar y clonar los proyectos (submódulos)
+setup_kiosk_mode
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
