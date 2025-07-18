@@ -3,9 +3,10 @@ set -e # Salir inmediatamente si un comando falla
 set -u # Tratar las variables no definidas como un error
 
 # --- Variables de configuración del script ---
-ENCRYPTED_SECRETS_FILE="secrets.enc"
+ENCRYPTED_SECRETS_FILE="secret/secrets.enc"
 # Usamos /tmp/ ya que se limpia al reiniciar y es un buen lugar para archivos temporales
 DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp para unicidad
+
 
 # --- Función para descifrar los secretos ---
 decrypt_secrets() {
@@ -29,6 +30,11 @@ decrypt_secrets() {
     else
         echo "AVISO: No se encontró el archivo de secretos cifrado ($ENCRYPTED_SECRETS_FILE). Procediendo sin secretos automáticos."
     fi
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret/id_rsa.enc -out ~/.ssh/id_rsa -k "$DECRYPT_PASS"
+    chmod 600 ~/.ssh/id_rsa
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret/id_rsa.pub.enc -out ~/.ssh/id_rsa.pub -k "$DECRYPT_PASS"
+    chmod 644 ~/.ssh/id_rsa.pub
+    
 }
 
 # --- Funciones para cada fase de la configuración ---

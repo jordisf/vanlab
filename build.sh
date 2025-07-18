@@ -8,6 +8,6 @@ read PASSWORD
 
 openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/secrets.env -out ./secret.enc/secrets.enc -k "$PASSWORD"
 
-openssl enc -aes-256-cbc -salt -pbkdf2 -in ~/.ssh/id_rsa -out ./secret.enc/id_rsa.enc -k "$PASSWORD"
+openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/id_rsa -out ./secret.enc/id_rsa.enc -k "$PASSWORD"
 
-openssl enc -aes-256-cbc -salt -pbkdf2 -in ~/.ssh/id_rsa.pub -out ./secret.enc/id_rsa.pub.enc -k "$PASSWORD"
+openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/id_rsa.pub -out ./secret.enc/id_rsa.pub.enc -k "$PASSWORD"

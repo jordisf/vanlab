@@ -1,0 +1,5 @@
+# Archivos de configuración
+secret/secrets.env
+secret/id_rsa
+secret/id_rsa.pub
+
