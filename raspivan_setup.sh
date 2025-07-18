@@ -29,9 +29,9 @@ decrypt_secrets() {
     else
         echo "AVISO: No se encontró el archivo de secretos cifrado ($ENCRYPTED_SECRETS_FILE). Procediendo sin secretos automáticos."
     fi
-    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret/id_rsa.enc -out ~/.ssh/id_rsa -k "$DECRYPT_PASS"
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret.enc/id_rsa.enc -out ~/.ssh/id_rsa -k "$DECRYPT_PASS"
     chmod 600 ~/.ssh/id_rsa
-    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret/id_rsa.pub.enc -out ~/.ssh/id_rsa.pub -k "$DECRYPT_PASS"
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret.enc/id_rsa.pub.enc -out ~/.ssh/id_rsa.pub -k "$DECRYPT_PASS"
     chmod 644 ~/.ssh/id_rsa.pub
 
 }
