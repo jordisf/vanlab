@@ -3,7 +3,7 @@ set -e # Salir inmediatamente si un comando falla
 set -u # Tratar las variables no definidas como un error
 
 # --- Variables de configuración del script ---
-ENCRYPTED_SECRETS_FILE="secret.enc/secrets.enc"
+ENCRYPTED_SECRETS_FILE="secret.enc/secrets.env.enc"
 # Usamos /tmp/ ya que se limpia al reiniciar y es un buen lugar para archivos temporales
 DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp para unicidad
 

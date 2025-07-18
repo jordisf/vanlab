@@ -5,9 +5,16 @@ read PASSWORD
 #encriptaremos el archivo secrets.env
 # para que no se suba a GitHub sin encriptar
 # y así evitar exponer datos sensibles. 
+ENCRYPTED_SECRETS_PATH="./secret.enc/"
+SECRETS_PATH="./secret/"
 
-openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/secrets.env -out ./secret.enc/secrets.enc -k "$PASSWORD"
+rm -rf "$ENCRYPTED_SECRETS_PATH"
+mkdir -p "$ENCRYPTED_SECRETS_PATH"
 
-openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/id_rsa -out ./secret.enc/id_rsa.enc -k "$PASSWORD"
-
-openssl enc -aes-256-cbc -salt -pbkdf2 -in ./secret/id_rsa.pub -out ./secret.enc/id_rsa.pub.enc -k "$PASSWORD"
+for file in "$SECRETS_PATH"*; do
+    file_name=$(basename "$file")
+    encrypted_file="$ENCRYPTED_SECRETS_PATH$file_name.enc"
+    original_file="$SECRETS_PATH$file_name"
+    openssl enc -aes-256-cbc -salt -pbkdf2 -in "$original_file" -out "$encrypted_file" -k "$PASSWORD"
+    echo "Encriptado: $original_file a $encrypted_file"
+done
