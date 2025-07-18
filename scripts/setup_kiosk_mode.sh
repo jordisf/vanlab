@@ -51,7 +51,7 @@ Restart=on-failure
 RestartSec=10
 
 # Ocultar el cursor del ratón después de inactividad
-ExecStartPost=/usr/bin/unclutter -idle 1 -root &
+# ExecStartPost=/usr/bin/unclutter -idle 1 -root &
 
 [Install]
 WantedBy=graphical.target
