@@ -7,6 +7,14 @@ ENCRYPTED_SECRETS_FILE="secret.enc/secrets.env.enc"
 # Usamos /tmp/ ya que se limpia al reiniciar y es un buen lugar para archivos temporales
 DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp para unicidad
 
+SCRIPTS_PATH="./scripts/"
+
+
+# --- Función para verificar permisos ---
+set_file_permissions() {
+    chmod u+x "$SCRIPTS_PATH"*.sh
+}
+
 # --- Función para descifrar los secretos ---
 decrypt_secrets() {
     if [ -f "$ENCRYPTED_SECRETS_FILE" ]; then
@@ -59,13 +67,13 @@ setup_tailscale() {
     echo "--> Ejecutando script de configuración de Tailscale..."
     # Pasamos el auth key como una variable de entorno al script de tailscale si lo deseas
     # export TAILSCALE_AUTH_KEY="$TAILSCALE_AUTH_KEY" # Esto ya está cargado por 'source'
-    ./scripts/setup_tailscale.sh
+    "$SCRIPTS_PATH/setup_tailscale.sh"
 }
 
 # Función para configurar el servidor web y copiar configs
 configure_web_server() {
     echo "--> Ejecutando script de configuración del servidor web..."
-    ./scripts/configure_webserver.sh
+    "$SCRIPTS_PATH/configure_webserver.sh"
 }
 
 # Función para inicializar y actualizar submódulos de Git (tus proyectos)
@@ -91,6 +99,9 @@ copy_custom_configs() {
 
 # --- Flujo principal de ejecución ---
 echo "--- Iniciando configuración automatizada de Raspberry Pi ---"
+
+# Paso 0: Verificar permisos de ejecución
+set_file_permissions
 
 # Paso 1: Descifrar y cargar los secretos (si existen)
 decrypt_secrets
