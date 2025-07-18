@@ -7,12 +7,12 @@ ENCRYPTED_SECRETS_FILE="secret.enc/secrets.env.enc"
 # Usamos /tmp/ ya que se limpia al reiniciar y es un buen lugar para archivos temporales
 DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp para unicidad
 
-SCRIPTS_PATH="./scripts/"
+SCRIPTS_PATH="./scripts"
 
 
 # --- Función para verificar permisos ---
 set_file_permissions() {
-    chmod u+x "$SCRIPTS_PATH"*.sh
+    chmod u+x "${SCRIPTS_PATH}/"*.sh
 }
 
 # --- Función para descifrar los secretos ---
@@ -76,22 +76,22 @@ setup_tailscale() {
     echo "--> Ejecutando script de configuración de Tailscale..."
     # Pasamos el auth key como una variable de entorno al script de tailscale si lo deseas
     # export TAILSCALE_AUTH_KEY="$TAILSCALE_AUTH_KEY" # Esto ya está cargado por 'source'
-    "$SCRIPTS_PATH/setup_tailscale.sh"
+    "${SCRIPTS_PATH}/setup_tailscale.sh"
 }
 
 setup_kiosk_mode() {
     echo "--> Ejecutando script de configuración del modo quiosco..."
-    "$SCRIPTS_PATH/setup_kiosk_mode.sh"
+    "${SCRIPTS_PATH}/setup_kiosk_mode.sh"
 }
 disable_virtual_keyboard() {
     echo "--> Deshabilitando el teclado virtual..."
-    "$SCRIPTS_PATH/disable_virtual_keyboard.sh"
+    "${SCRIPTS_PATH}/disable_virtual_keyboard.sh"
 }
 
 # Función para configurar el servidor web y copiar configs
 configure_web_server() {
     echo "--> Ejecutando script de configuración del servidor web..."
-    "$SCRIPTS_PATH/configure_webserver.sh"
+    "${SCRIPTS_PATH}/configure_webserver.sh"
 }
 
 # Función para inicializar y actualizar submódulos de Git (tus proyectos)
@@ -122,19 +122,19 @@ echo "--- Iniciando configuración automatizada de Raspberry Pi ---"
 set_file_permissions
 
 # Paso 1: Descifrar y cargar los secretos (si existen)
-decrypt_secrets
+# decrypt_secrets
 
 # Paso 2: Instalar dependencias del sistema y actualizar
-install_system_dependencies
+# install_system_dependencies
 
 # Paso 3: Configurar claves SSH
 # configure_ssh_keys
 
 # Paso 4: Configurar Tailscale (usará $TAILSCALE_AUTH_KEY si se cargó desde los secretos)
-setup_tailscale
+# setup_tailscale
 
 # Paso 5: Inicializar y clonar los proyectos (submódulos)
-clone_projects
+# clone_projects
 
 # Paso 6: Configurar el servidor web (ej. Nginx para el proyecto web)
 # configure_web_server
@@ -144,7 +144,6 @@ clone_projects
 
 # Paso 8: Inicializar y clonar los proyectos (submódulos)
 setup_kiosk_mode
-
 
 disable_virtual_keyboard
 
