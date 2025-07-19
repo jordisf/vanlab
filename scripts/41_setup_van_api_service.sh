@@ -60,11 +60,11 @@ echo "--> Archivos de servicio y socket systemd creados."
 
 # 3. Recargar systemd, habilitar e iniciar los servicios
 echo "--> Recargando systemd y habilitando/iniciando servicios..."
-sudo systemctl daemon-reload # Recarga las definiciones de servicio de systemd
-sudo systemctl start "$GUNICORN_SOCKET_NAME" # Inicia el socket
-sudo systemctl enable "$GUNICORN_SOCKET_NAME" # Habilita el socket para que inicie con el arranque
-sudo systemctl start "$SERVICE_NAME" # Inicia el servicio Gunicorn
-sudo systemctl enable "$SERVICE_NAME" # Habilita el servicio para que inicie con el arranque
+sudo systemctl daemon-reload 
+sudo systemctl start "$GUNICORN_SOCKET_NAME" 
+sudo systemctl enable "$GUNICORN_SOCKET_NAME" 
+sudo systemctl start "$SERVICE_NAME" 
+sudo systemctl enable "$SERVICE_NAME" 
 
 echo "--> Servicio van-api configurado y en ejecución."
 echo "Puedes verificar su estado con: sudo systemctl status $SERVICE_NAME"
