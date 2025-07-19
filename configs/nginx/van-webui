@@ -2,7 +2,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    root /home/pi/vanlab/projects/van-webui/www;
+    root /var/www/html/van-webui/www;
     index index.html index.htm;
 
     server_name _; # Se puede usar la IP o un dominio si lo configuras
