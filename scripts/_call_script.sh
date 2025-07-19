@@ -16,7 +16,7 @@ echo "**** Flag script name: $flag_script_name"
 # Verificar si el script ya se ha ejecutado
 if [ -f "$flag_script_name" ]; then
     echo "El script '$script_name' ya se ha ejecutado anteriormente. Saliendo sin hacer nada."
-    exit 0
+    return 0
 fi
 # Ejecutar el script
 if [ -f "$script_name" ]; then
@@ -24,7 +24,7 @@ if [ -f "$script_name" ]; then
     source "$script_name"
 else
     echo "ERROR: El script '$script_name' no se encuentra en la ruta especificada."
-    exit 1
+    return 1
 fi
 
 # Marcar el script como ejecutado creando un archivo de flag
