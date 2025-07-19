@@ -7,10 +7,11 @@ script_path="$(dirname "$script_name")"
 script_file_name="$(basename "$script_name")"
 flag_script_name="${script_path}/.${script_file_name}.done"
 
-echo "Ejecutando script: $script_name"
-echo "Ruta del script: $script_path"
-echo "Nombre del archivo: $script_file_name"
-echo "Flag script name: $flag_script_name"
+echo "*************************************************************************"
+echo "**** Ejecutando script: $script_name"
+echo "**** Ruta del script: $script_path"
+echo "**** Nombre del archivo: $script_file_name"
+echo "**** Flag script name: $flag_script_name"
 
 # Verificar si el script ya se ha ejecutado
 if [ -f "$flag_script_name" ]; then
@@ -28,6 +29,4 @@ fi
 
 # Marcar el script como ejecutado creando un archivo de flag
 touch "$flag_script_name"
-echo "Script '$script_name' ejecutado correctamente. Se ha creado el archivo de flag: $flag_script_name"
-echo "Puedes eliminar este archivo manualmente si necesitas volver a ejecutar el script."
-echo "Fin de la ejecución del script '$script_name'."
+echo "**** Fin de la ejecución del script '$script_name'."
