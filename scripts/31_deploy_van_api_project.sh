@@ -33,7 +33,7 @@ pushd "$BACKEND_PROD_DIR" > /dev/null # Moverse al directorio de producción de 
 
 if [ ! -d "venv" ]; then
     echo "Entorno virtual no encontrado en $BACKEND_PROD_DIR, creando uno nuevo..."
-    python3 -m venv venv || { echo "ERROR: No se pudo crear el entorno virtual de la API."; popd > /dev/null; exit 1; }
+    sudo python3 -m venv venv || { echo "ERROR: No se pudo crear el entorno virtual de la API."; popd > /dev/null; exit 1; }
 fi
 source venv/bin/activate || { echo "ERROR: No se pudo activar el entorno virtual de la API."; popd > /dev/null; exit 1; }
 
