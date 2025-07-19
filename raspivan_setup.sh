@@ -16,11 +16,11 @@ echo "--- Iniciando configuración automatizada de Raspberry Pi ---"
 set_file_permissions
 
 
-source $CALL_SCRIPT '${SCRIPTS_PATH}/00_load_secrets.sh'
-source $CALL_SCRIPT '${SCRIPTS_PATH}/10_install_system_dependencies.sh'
-source $CALL_SCRIPT '${SCRIPTS_PATH}/11_setup_tailscale.sh'
-source $CALL_SCRIPT '${SCRIPTS_PATH}/19_clone_projects.sh'
-source $CALL_SCRIPT '${SCRIPTS_PATH}/42_setup_kiosk_service.sh'
+source $CALL_SCRIPT "${SCRIPTS_PATH}/00_load_secrets.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/10_install_system_dependencies.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/11_setup_tailscale.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/19_clone_projects.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/42_setup_kiosk_service.sh"
 
 source "${SCRIPTS_PATH}/30_deploy_web_project.sh"
 source "${SCRIPTS_PATH}/31_deploy_van_api_project.sh"
