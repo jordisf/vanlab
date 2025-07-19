@@ -9,7 +9,6 @@ DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp pa
 
 SCRIPTS_PATH="./scripts"
 
-
 # --- Función para verificar permisos ---
 set_file_permissions() {
     chmod u+x "${SCRIPTS_PATH}/"*.sh
@@ -20,19 +19,6 @@ set_file_permissions() {
 configure_ssh_keys() {
     echo "--> Ejecutando script de configuración SSH..."
     ./scripts/configure_ssh.sh
-}
-
-# Función para configurar Tailscale
-setup_tailscale() {
-    echo "--> Ejecutando script de configuración de Tailscale..."
-    # Pasamos el auth key como una variable de entorno al script de tailscale si lo deseas
-    # export TAILSCALE_AUTH_KEY="$TAILSCALE_AUTH_KEY" # Esto ya está cargado por 'source'
-    "${SCRIPTS_PATH}/setup_tailscale.sh"
-}
-
-setup_kiosk_mode() {
-    echo "--> Ejecutando script de configuración del modo quiosco..."
-    "${SCRIPTS_PATH}/setup_kiosk_mode.sh"
 }
 
 
@@ -70,7 +56,7 @@ set_file_permissions
 source ${SCRIPTS_PATH}/10_install_system_dependencies.sh
 
 # Configurar Tailscale (usará $TAILSCALE_AUTH_KEY si se cargó desde los secretos)
-source "${SCRIPTS_PATH}/setup_tailscale.sh"
+source "${SCRIPTS_PATH}/11_setup_tailscale.sh"
 
 # Inicializar y clonar los proyectos (submódulos)
 source "${SCRIPTS_PATH}/19_clone_projects.sh"
