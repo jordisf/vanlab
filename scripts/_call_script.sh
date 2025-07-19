@@ -5,7 +5,7 @@ set -u
 script_name="$1"
 script_path="$(dirname "$script_name")"
 script_file_name="$(basename "$script_name")"
-flag_script_name="./${script_path}/.${script_file_name}.done"
+flag_script_name="${script_path}/.${script_file_name}.done"
 
 echo "Ejecutando script: $script_name"
 echo "Ruta del script: $script_path"
