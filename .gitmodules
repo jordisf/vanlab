@@ -1,3 +1,6 @@
 [submodule "projects/van-webui"]
 	path = projects/van-webui
 	url = git@github.com:jordisf/van-webui.git
+[submodule "projects/van-api"]
+	path = projects/van-api
+	url = git@github.com:jordisf/van-api.git
