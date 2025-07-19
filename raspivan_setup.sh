@@ -2,44 +2,11 @@
 set -e # Salir inmediatamente si un comando falla
 set -u # Tratar las variables no definidas como un error
 
-# --- Variables de configuración del script ---
-ENCRYPTED_SECRETS_FILE="secret.enc/secrets.env.enc"
-# Usamos /tmp/ ya que se limpia al reiniciar y es un buen lugar para archivos temporales
-DECRYPTED_SECRETS_FILE="/tmp/rpi_secrets_$(date +%s).env" # Añadir timestamp para unicidad
-
 SCRIPTS_PATH="./scripts"
 
 # --- Función para verificar permisos ---
 set_file_permissions() {
     chmod u+x "${SCRIPTS_PATH}/"*.sh
-}
-
-
-# Función para generar y configurar claves SSH
-configure_ssh_keys() {
-    echo "--> Ejecutando script de configuración SSH..."
-    ./scripts/configure_ssh.sh
-}
-
-
-# Función para configurar el servidor web y copiar configs
-configure_web_server() {
-    echo "--> Ejecutando script de configuración del servidor web..."
-    "${SCRIPTS_PATH}/configure_webserver.sh"
-}
-
-# Función para copiar archivos de configuración personalizados
-copy_custom_configs() {
-    echo "--> Copiando archivos de configuración personalizados..."
-    # Ejemplo: copiar un .bashrc personalizado
-    if [ -f "configs/.bashrc_custom" ]; then
-        cp configs/.bashrc_custom "$HOME/.bashrc"
-        echo "source ~/.bashrc" # Asegurarse de que los cambios se carguen
-    fi
-    # Ejemplo: copiar config de Nginx para el sitio
-    # sudo cp configs/nginx_site_config /etc/nginx/sites-available/my_website
-    # sudo ln -s /etc/nginx/sites-available/my_website /etc/nginx/sites-enabled/
-    # sudo systemctl reload nginx
 }
 
 # --- Flujo principal de ejecución ---
@@ -66,8 +33,8 @@ source "${SCRIPTS_PATH}/19_clone_projects.sh"
 
 # Copiar otras configuraciones personalizadas
 
-source "${SCRIPTS_PATH}/setup_kiosk_mode.sh"
-source "${SCRIPTS_PATH}/disable_virtual_keyboard.sh"
+source "${SCRIPTS_PATH}/20_disable_virtual_keyboard.sh"
+source "${SCRIPTS_PATH}/21_setup_kiosk_mode.sh"
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."

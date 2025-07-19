@@ -3,7 +3,7 @@ set -e
 set -u
 
 # --- Variables para este script ---
-ENCRYPTED_SECRETS_FILE="secret.enc/secrets.enc" # Ruta relativa al directorio raíz del repositorio
+ENCRYPTED_SECRETS_FILE="./secret.enc/secrets.env.enc" # Ruta relativa al directorio raíz del repositorio
 # Usamos un archivo temporal con un timestamp para evitar colisiones y asegurar la unicidad.
 DECRYPTED_SECRETS_TEMP_FILE="/tmp/rpi_secrets_$(date +%s).env"
 
