@@ -5,7 +5,7 @@ set -u # Tratar las variables no definidas como un error
 echo "--> Configurando el entorno de escritorio y Chromium para modo quiosco..."
 
 # ¡IMPORTANTE! Ajusta esta URL a tu página web real.
-WEB_PAGE_URL="http://192.168.2.10/gui-v2/"
+WEB_PAGE_URL="http://localhost/"
 KIOSK_SERVICE_FILE="/etc/systemd/system/kiosk.service"
 KIOSK_USER="pi" # Definir el usuario bajo el que se ejecutará el servicio
 
