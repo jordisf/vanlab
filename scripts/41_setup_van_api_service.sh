@@ -4,4 +4,4 @@ set -u
 
 echo "--> Copiando configuración de Gunicorn para la API..."
 
-cp ./configs/gunicorn/van_api.service /etc/systemd/system/van_api.service || { echo "ERROR: No se pudo copiar el archivo de servicio de Gunicorn."; exit 1; }
+sudo cp ./configs/gunicorn/van_api.service /etc/systemd/system/van_api.service || { echo "ERROR: No se pudo copiar el archivo de servicio de Gunicorn."; exit 1; }
