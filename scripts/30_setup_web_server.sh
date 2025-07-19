@@ -9,7 +9,7 @@ echo "  Instalando el paquete Nginx..."
 sudo apt update
 sudo apt install -y nginx
 
-echo "  Configurando Nginx para servir desde: $WEB_PROJECT_ROOT"
+echo "  Configurando Nginx..."
 
 # 3. Crear o modificar la configuración de Nginx
 # Vamos a crear un nuevo archivo de configuración para nuestro sitio
