@@ -6,7 +6,9 @@ set -u
 # --- CONFIGURACIÓN INTERNA ---
 SOURCE_DIR="/home/pi/vanlab/projects/van-api" # Ruta al directorio del código fuente de la API
 BACKEND_PROD_DIR="/opt/van-api"
+VENV_PATH="$BACKEND_PROD_DIR/venv"
 SERVICE_USER="www-data" # Usuario bajo el que Gunicorn correrá
+
 
 echo "--- Desplegando archivos del Backend API (van-api) ---"
 echo "Origen del código: $SOURCE_DIR"
