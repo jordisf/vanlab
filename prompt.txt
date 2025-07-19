@@ -1,0 +1,30 @@
+Estamos confeccionando un sistema de configuración automática para una raspberry pi que va a alojar distintos servicios.
+Precisaremos de un Script de Setup principal que irá llamando otros scripts específicos de configuración.
+Las partes clave son:
+- Todo estará en un repositorio público de github
+- Habrá otros repositorios de github privados que se establecerán como submódulos del repositorio principal.
+- Almacenaremos claves privadas encriptadas por lo que deberá haber un script dedicado a desencriptar con una contraseña que se pedirá interactivamente por consola. Estas keys estarán disponibles para distintos scripts del proceso ( por ejemplo el token de tailscale para su instalación y configuración )
+- Como servicios tendremos un servidor Web para servir páginas estáticas, Home Assistant en modo docker
+- Ejecutar en modo kiosco un navegador con una url predeterminada.
+
+He adjuntado el archivo de configuración principal.
+La estructura de directorios es la siguiente:
+vanlab/
+├── README.md                                       # Instrucciones generales: cómo clonar, ejecutar, etc.
+├── raspivan_setup.sh                               # ¡El script principal de orquestación!
+├── .gitignore                                      # Para ignorar archivos sensibles sin cifrar (ej. secrets.env) y temporales
+├── secret.enc/                                     # Directorio para archivos encriptados
+│   ├── secrets.env.enc                             # Archivo con Key Values de configuración
+│   ├── authorized_keys.enc                         # Archivo authorized_keys.enc con las claves públicas autorizadas
+│   ├── id_rsa.pub.enc                              # Clave pública ssh encriptada
+│   └── id_rsa.enc                                  # Clave privada ssh encriptada
+├── scripts/                                        # Directorio para scripts modulares y específicos
+│   ├── 00_load_secrets.sh                          # Desencripta, carga keys y copia las claves ssh y authorized_keys
+│   ├── 10_install_system_dependencies.sh           # Instala dependencias
+│   ├── 11_setup_tailscale.sh                       # Instala y configura Tailscale
+│   ├── 19_clone_projects.sh                        # Clona y actualiza submodulos de git ( van-webui )
+│   ├── 30_setup_web_server.sh                      # Configura servidor Web
+│   └── 21_setup_kiosk_mode.sh                      # Configura el Kiosk Mode
+├── projects/                 # Directorio para tus proyectos (contendrá el submódulo)
+│   └── van-webui/           # <--- Este es el submódulo (apunta a tu repo web)
+└── .gitmodules  

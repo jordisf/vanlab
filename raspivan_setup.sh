@@ -34,7 +34,7 @@ source "${SCRIPTS_PATH}/30_setup_web_server.sh"
 
 # Copiar otras configuraciones personalizadas
 
-source "${SCRIPTS_PATH}/20_disable_virtual_keyboard.sh"
+# source "${SCRIPTS_PATH}/20_disable_virtual_keyboard.sh"  ## Esto ya se consigue desinstalando squeekboard
 source "${SCRIPTS_PATH}/21_setup_kiosk_mode.sh"
 
 echo "--- Configuración de Raspberry Pi completada. ---"
