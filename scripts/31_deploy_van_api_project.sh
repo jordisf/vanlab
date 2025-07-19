@@ -38,7 +38,9 @@ fi
 source venv/bin/activate || { echo "ERROR: No se pudo activar el entorno virtual de la API."; popd > /dev/null; exit 1; }
 
 echo "Instalando dependencias de Python para la API desde requirements.txt..."
-sudo pip install -r requirements.txt || { echo "ERROR: Falló la instalación de dependencias de Python para la API."; popd > /dev/null; exit 1; }
+sudo -u "$SERVICE_USER" "$VENV_PATH/bin/pip" install --upgrade pip || { echo "ERROR: Falló la actualización de pip en el entorno virtual."; exit 1; }
+sudo -u "$SERVICE_USER" "$VENV_PATH/bin/pip" install -r "$BACKEND_PROD_DIR/requirements.txt" || { echo "ERROR: Falló la instalación de dependencias de Python para la API."; exit 1; }
+
 
 deactivate # Desactivar el entorno virtual
 popd > /dev/null # Volver al directorio original
