@@ -1,0 +1,35 @@
+[Unit]
+Description=Chromium Kiosk Mode
+After=network.target graphical.target
+
+[Service]
+User=pi
+Group=pi
+
+# Set environment variables, specifically for Xorg display
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/pi/.Xauthority"
+
+ExecStartPre=/bin/sh -c 'sleep 5' # Dar tiempo al servidor X para iniciar
+# Chromium flags:
+# --kiosk: MODO QUIOSCO (pantalla completa, sin interfaz)
+# --incognito: No guarda historial/cookies
+# --disable-features=TranslateUI: Deshabilita la barra de traducción
+# --noerrdialogs: No muestra diálogos de error
+# --disable-infobars: Deshabilita las barras de información
+# --window-position=0,0: Posiciona la ventana en la esquina superior izquierda
+# --disk-cache-dir=/dev/null: Deshabilita la caché en disco
+# --ozone-platform-hint=x11: Fuerza el uso de X11 si estás en un entorno Wayland con XWayland
+# --disable-gpu-vsync: Puede ayudar a mejorar el rendimiento
+# --enable-features=OverlayScrollbar: Barras de desplazamiento más finas
+# --app: Abre la URL como una aplicación web
+ExecStart=/usr/bin/chromium-browser --kiosk --incognito  --app="http://localhost"  --start-fullscreen --disable-features=TranslateUI --noerrdialogs --disable-infobars --window-position=0,0 --disk-cache-dir=/dev/null --ozone-platform-hint=x11 --disable-gpu-vsync --enable-features=OverlayScrollbar
+
+Restart=on-failure
+RestartSec=10
+
+# Ocultar el cursor del ratón después de inactividad
+# ExecStartPost=/usr/bin/unclutter -idle 1 -root &
+
+[Install]
+WantedBy=graphical.target

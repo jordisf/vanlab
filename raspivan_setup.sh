@@ -28,17 +28,15 @@ source "${SCRIPTS_PATH}/11_setup_tailscale.sh"
 # Inicializar y clonar los proyectos (submódulos)
 source "${SCRIPTS_PATH}/19_clone_projects.sh"
 
-# Configurar el servidor web (ej. Nginx para el proyecto web)
-# configure_web_server
-source "${SCRIPTS_PATH}/30_setup_web_server.sh"
 
-# Copiar otras configuraciones personalizadas
+source "${SCRIPTS_PATH}/30_deploy_web_project.sh"
+source "${SCRIPTS_PATH}/31_deploy_van_api_project.sh"
 
-# source "${SCRIPTS_PATH}/20_disable_virtual_keyboard.sh"  ## Esto ya se consigue desinstalando squeekboard
-source "${SCRIPTS_PATH}/21_setup_kiosk_mode.sh"
+source "${SCRIPTS_PATH}/40_setup_web_server.sh"
 
-# Desplegar archivos web al servidor Nginx
-source "${SCRIPTS_PATH}/40_deploy_web_projects.sh"
+source "${SCRIPTS_PATH}/41_setup_van_api_service.sh"
+
+source "${SCRIPTS_PATH}/42_setup_kiosk_service.sh"
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
