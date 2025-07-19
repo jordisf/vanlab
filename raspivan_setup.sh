@@ -37,5 +37,8 @@ source "${SCRIPTS_PATH}/30_setup_web_server.sh"
 # source "${SCRIPTS_PATH}/20_disable_virtual_keyboard.sh"  ## Esto ya se consigue desinstalando squeekboard
 source "${SCRIPTS_PATH}/21_setup_kiosk_mode.sh"
 
+# Desplegar archivos web al servidor Nginx
+source "${SCRIPTS_PATH}/40_deploy_web_projects.sh"
+
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
