@@ -3,6 +3,7 @@ set -e # Salir inmediatamente si un comando falla
 set -u # Tratar las variables no definidas como un error
 
 SCRIPTS_PATH="./scripts"
+CALL_SCRIPT="./scripts/_call_script.sh"
 
 # --- Función para verificar permisos ---
 set_file_permissions() {
@@ -20,7 +21,7 @@ source ${SCRIPTS_PATH}/00_load_secrets.sh # <--- ¡CAMBIO CLAVE AQUÍ!
 set_file_permissions
 
 # Instalar dependencias del sistema y actualizar
-source ${SCRIPTS_PATH}/10_install_system_dependencies.sh
+source $CALL_SCRIPT ${SCRIPTS_PATH}/10_install_system_dependencies.sh
 
 # Configurar Tailscale (usará $TAILSCALE_AUTH_KEY si se cargó desde los secretos)
 source "${SCRIPTS_PATH}/11_setup_tailscale.sh"
