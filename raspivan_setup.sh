@@ -30,6 +30,7 @@ source "${SCRIPTS_PATH}/19_clone_projects.sh"
 
 # Configurar el servidor web (ej. Nginx para el proyecto web)
 # configure_web_server
+source "${SCRIPTS_PATH}/30_setup_web_server.sh"
 
 # Copiar otras configuraciones personalizadas
 
