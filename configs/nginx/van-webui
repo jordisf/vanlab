@@ -11,6 +11,18 @@ server {
         try_files $uri $uri/ /index.html =404;
     }
 
+    location /api/ {
+        # Conectarse al socket UNIX que Gunicorn está escuchando
+        # Asegúrate de que esta ruta coincida con 'ListenStream' en van-api.socket
+        proxy_pass http://unix:/run/van-api.sock:/; 
+        
+        # Encabezados importantes para que la API reciba información correcta
+        proxy_set_header Host $http_host; 
+        proxy_set_header X-Real-IP $remote_addr; 
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+        proxy_redirect off; # Evita que Nginx intente redirigir rutas internas
+    }
+
     # Posibles configuraciones futuras para Victron/MQTT (proxy_pass, websockets)
     # location /victron_http_api/ {
     #     proxy_pass http://<IP_VICRON_VRM_O_DISPOSITIVO_LOCAL>:8080/; # Ejemplo
