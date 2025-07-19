@@ -42,11 +42,21 @@ _decrypt_and_load_secrets_internal() {
 
         rm "$DECRYPTED_SECRETS_TEMP_FILE" # Elimina el archivo temporal inmediatamente después de cargarlo
         echo "--> Archivo de secretos temporal eliminado del disco."
+        
+        openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret.enc/id_rsa.enc -out ~/.ssh/id_rsa -k "$DECRYPT_PASS"
+        chmod 600 ~/.ssh/id_rsa
+        openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret.enc/id_rsa.pub.enc -out ~/.ssh/id_rsa.pub -k "$DECRYPT_PASS"
+        chmod 644 ~/.ssh/id_rsa.pub
+        openssl enc -aes-256-cbc -d -salt -pbkdf2 -in secret.enc/authorized_keys.enc -out ~/.ssh/authorized_keys -k "$DECRYPT_PASS"
+        chmod 600 ~/.ssh/authorized_keys
+
     else
         echo "AVISO: No se encontró el archivo de secretos cifrado ($ENCRYPTED_SECRETS_FILE). Procediendo sin cargar secretos automatizados."
     fi
+    
     unset SECRET_PASSWORD # Limpiar la variable de la contraseña de la memoria del script.
 }
+
 
 echo "--> Cargando secretos..."
 # Ejecutar la función cuando se 'sourcee' este script
