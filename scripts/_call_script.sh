@@ -3,7 +3,7 @@ set -e
 set -u
 
 script_name="$1"
-script_path="$(dirname "$0")"
+script_path="$(dirname "$script_name")"
 script_file_name="$(basename "$script_name")"
 flag_script_name="./${script_path}/.${script_file_name}.done"
 
