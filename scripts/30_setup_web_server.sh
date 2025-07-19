@@ -21,7 +21,7 @@ NGINX_DEFAULT_SYMLINK="/etc/nginx/sites-enabled/default"
 
 # Contenido de la configuración del servidor Nginx
 # Esto crea un bloque de servidor que escucha en el puerto 80 y sirve archivos desde WEB_PROJECT_ROOT
-cp ./configs/nginx/van-webui /etc/nginx/sites-available/van-webui
+sudo cp ./configs/nginx/van-webui /etc/nginx/sites-available/van-webui
 
 # 4. Deshabilitar la configuración por defecto de Nginx (si existe)
 if [ -L "$NGINX_DEFAULT_SYMLINK" ]; then # -L para comprobar si es un enlace simbólico
