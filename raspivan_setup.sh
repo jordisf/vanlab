@@ -24,7 +24,7 @@ set_file_permissions
 source $CALL_SCRIPT ${SCRIPTS_PATH}/10_install_system_dependencies.sh
 
 # Configurar Tailscale (usará $TAILSCALE_AUTH_KEY si se cargó desde los secretos)
-source "${SCRIPTS_PATH}/11_setup_tailscale.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/11_setup_tailscale.sh"
 
 # Inicializar y clonar los proyectos (submódulos)
 source "${SCRIPTS_PATH}/19_clone_projects.sh"
