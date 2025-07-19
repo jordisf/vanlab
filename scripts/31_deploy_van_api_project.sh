@@ -38,7 +38,7 @@ fi
 source venv/bin/activate || { echo "ERROR: No se pudo activar el entorno virtual de la API."; popd > /dev/null; exit 1; }
 
 echo "Instalando dependencias de Python para la API desde requirements.txt..."
-pip install -r requirements.txt || { echo "ERROR: Falló la instalación de dependencias de Python para la API."; popd > /dev/null; exit 1; }
+sudo pip install -r requirements.txt || { echo "ERROR: Falló la instalación de dependencias de Python para la API."; popd > /dev/null; exit 1; }
 
 deactivate # Desactivar el entorno virtual
 popd > /dev/null # Volver al directorio original
