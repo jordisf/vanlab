@@ -2,13 +2,10 @@
 set -e
 set -u
 
-
 # --- CONFIGURACIÓN INTERNA ---
 SOURCE_DIR="/home/pi/vanlab/projects/van-api" # Ruta al directorio del código fuente de la API
 BACKEND_PROD_DIR="/opt/van-api"
-VENV_PATH="$BACKEND_PROD_DIR/venv"
 SERVICE_USER="www-data" # Usuario bajo el que Gunicorn correrá
-
 
 echo "--- Desplegando archivos del Backend API (van-api) ---"
 echo "Origen del código: $SOURCE_DIR"
@@ -29,22 +26,4 @@ echo "Ajustando permisos de archivos para el usuario del servicio ($SERVICE_USER
 sudo chown -R "$SERVICE_USER":"$SERVICE_USER" "$BACKEND_PROD_DIR" || { echo "ERROR: No se pudieron ajustar los permisos."; exit 1; }
 sudo chmod -R ugo+rX "$BACKEND_PROD_DIR" || { echo "ERROR: No se pudieron ajustar los permisos (lectura/ejecución)."; exit 1; }
 
-# 4. Crear y configurar el entorno virtual en el directorio de producción
-echo "Configurando entorno virtual para la API en $BACKEND_PROD_DIR..."
-pushd "$BACKEND_PROD_DIR" > /dev/null # Moverse al directorio de producción de la API
-
-if [ ! -d "venv" ]; then
-    echo "Entorno virtual no encontrado en $BACKEND_PROD_DIR, creando uno nuevo..."
-    sudo python3 -m venv venv || { echo "ERROR: No se pudo crear el entorno virtual de la API."; popd > /dev/null; exit 1; }
-fi
-source venv/bin/activate || { echo "ERROR: No se pudo activar el entorno virtual de la API."; popd > /dev/null; exit 1; }
-
-echo "Instalando dependencias de Python para la API desde requirements.txt..."
-sudo -u "$SERVICE_USER" "$VENV_PATH/bin/pip" install --upgrade pip || { echo "ERROR: Falló la actualización de pip en el entorno virtual."; exit 1; }
-sudo -u "$SERVICE_USER" "$VENV_PATH/bin/pip" install -r "$BACKEND_PROD_DIR/requirements.txt" || { echo "ERROR: Falló la instalación de dependencias de Python para la API."; exit 1; }
-
-
-deactivate # Desactivar el entorno virtual
-popd > /dev/null # Volver al directorio original
-
-echo "Archivos del Backend API desplegados y entorno virtual configurado."
+echo "Archivos del Backend API desplegados."
