@@ -2,4 +2,4 @@
 set -e
 set -u
 
-sudo systemctl stop kiosk.service || true
+systemctl stop kiosk.service || true
