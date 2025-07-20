@@ -3,11 +3,13 @@ set -e # Salir inmediatamente si un comando falla
 set -u # Tratar las variables no definidas como un error
 
 SCRIPTS_PATH="./scripts"
+SYS_SCRIPTS_PATH="./sys_scripts"
 CALL_SCRIPT="./scripts/_call_script.sh"
 
 # --- Función para verificar permisos ---
 set_file_permissions() {
     chmod u+x "${SCRIPTS_PATH}/"*.sh
+    chmod u+x "${SYS_SCRIPTS_PATH}/"*.sh
 }
 
 # --- Flujo principal de ejecución ---
