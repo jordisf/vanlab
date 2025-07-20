@@ -19,8 +19,9 @@ set_file_permissions
 
 source $CALL_SCRIPT "${SCRIPTS_PATH}/00_load_secrets.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/10_install_system_dependencies.sh"
-source $CALL_SCRIPT "${SCRIPTS_PATH}/11_setup_tailscale.sh"
-source $CALL_SCRIPT "${SCRIPTS_PATH}/20_load_configurations.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/11_load_configurations.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/12_install_artifacts.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/20_setup_tailscale.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/19_clone_projects.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/42_setup_kiosk_service.sh"
 
