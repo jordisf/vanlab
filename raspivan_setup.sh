@@ -34,3 +34,5 @@ source $CALL_SCRIPT "${SCRIPTS_PATH}/41_setup_van_api_service.sh"
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
+echo "Tailscale está configurado. Usa 'sudo tailscale status' para verificar. Usa 'sudo tailscale up --accept-routes' para iniciar el servicio."
+echo "Si no usaste una auth key, autentica Tailscale manualmente con 'sudo tailscale up' y sigue las instrucciones en pantalla."
