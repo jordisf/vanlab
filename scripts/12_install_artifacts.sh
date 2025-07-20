@@ -2,4 +2,4 @@
 set -e
 set -u
 
-cp ./artifacts/IniciarKiosk.sh ~/Desktop/IniciarKiosk.sh
+cp ./artifacts/StartKiosk.sh ~/Desktop/StartKiosk.sh
