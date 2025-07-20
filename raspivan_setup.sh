@@ -9,6 +9,7 @@ CALL_SCRIPT="./scripts/_call_script.sh"
 # --- Función para verificar permisos ---
 set_file_permissions() {
     chmod u+x "${SCRIPTS_PATH}/"*.sh
+    sudo chown root:root "${SYS_SCRIPTS_PATH}/"*.sh
     chmod u+x "${SYS_SCRIPTS_PATH}/"*.sh
 }
 
