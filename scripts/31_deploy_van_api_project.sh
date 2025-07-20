@@ -38,4 +38,8 @@ fi
 echo "Sincronizando scripts del backend desde '$SOURCE_SCRIPTS_DIR' a '$BACKEND_SCRIPTS_DIR'..."
 sudo rsync -av "$SOURCE_SCRIPTS_DIR/" "$BACKEND_SCRIPTS_DIR/" || { echo "ERROR: Falló la sincronización de scripts del backend."; exit 1; }
 
+echo "Ajustando permisos de archivos para sys_scripts..."
+sudo chown -R root:root "$BACKEND_SCRIPTS_DIR" || { echo "ERROR: No se pudieron ajustar los permisos."; exit 1; }
+sudo chmod -R ug+rX "$BACKEND_SCRIPTS_DIR" || { echo "ERROR: No se pudieron ajustar los permisos (lectura/ejecución)."; exit 1; }
+
 echo "Archivos del Backend API desplegados."
