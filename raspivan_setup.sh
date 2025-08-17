@@ -31,6 +31,7 @@ source "${SCRIPTS_PATH}/31_deploy_van_api_project.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/32_set_van_api_environment.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/40_setup_web_server.sh"
 source $CALL_SCRIPT "${SCRIPTS_PATH}/41_setup_van_api_service.sh"
+source $CALL_SCRIPT "${SCRIPTS_PATH}/43_setup_screen_manager_service.sh"
 
 echo "--- Configuración de Raspberry Pi completada. ---"
 echo "Por favor, revisa los mensajes anteriores para cualquier acción manual pendiente (ej. añadir clave SSH a GitHub, autenticar Tailscale si no usaste auth key)."
