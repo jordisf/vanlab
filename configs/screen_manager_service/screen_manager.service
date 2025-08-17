@@ -1,0 +1,25 @@
+[Unit]
+# Descripción de lo que hace nuestro servicio.
+Description=Screen Power Manager for Kiosk using Python script
+# Le dice al sistema que inicie este servicio solo después de que el sistema base esté listo.
+After=multi-user.target
+
+[Service]
+# Define el tipo de servicio. 'simple' es estándar para scripts que se ejecutan continuamente.
+Type=simple
+
+# ¡La línea más importante! Define el comando a ejecutar.
+# Usamos la ruta completa a Python3 y a nuestro script.
+ExecStart=/usr/bin/python3 /usr/local/sbin/ScreenManager.py
+
+# Política de reinicio. 'always' asegura que si el script falla por cualquier razón, se reiniciará automáticamente.
+Restart=always
+
+# Especifica que el script debe ejecutarse como el superusuario (root),
+# ya que necesita acceso a los dispositivos de hardware.
+User=root
+
+[Install]
+# Le dice al sistema en qué "nivel" de arranque debe engancharse este servicio.
+# 'multi-user.target' es el estado normal de funcionamiento con red y sin entorno gráfico iniciado todavía.
+WantedBy=multi-user.target
